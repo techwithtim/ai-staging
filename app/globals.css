@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* Palette taken from the rooms these photos show: trim, wall, slate, the walnut floor, the sky. */
+@theme {
+  --color-trim: #fafaf7;
+  --color-wall: #d8d4cc;
+  --color-plaster: #f1efea;
+  --color-slate: #262c31;
+  --color-slate-soft: #5b636a;
+  --color-walnut: #7a5536;
+  --color-walnut-soft: #efe4d9;
+  --color-sky: #4f6d7b;
+  --color-sky-soft: #e1e9ed;
+  --color-alarm: #a33a2b;
+
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-photo: 8px;
+  --radius-control: 8px;
+}
+
+@layer base {
+  html {
+    background: var(--color-trim);
+    color: var(--color-slate);
+    font-family: var(--font-sans);
+    font-feature-settings: "tnum" 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-walnut-soft);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-slate);
+    outline-offset: 2px;
+  }
+}
+
+/* The landing hero enters once on load; nothing else on the page animates on scroll. */
+@keyframes landing-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.landing-enter {
+  animation: landing-enter 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
